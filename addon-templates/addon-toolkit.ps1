@@ -27,7 +27,7 @@ $ErrorActionPreference = "Stop"
 $RepoRoot = Split-Path -Parent $PSScriptRoot
 
 function Write-Info([string] $Message) {
-    Write-Host "[AUTISM] $Message" -ForegroundColor DarkGray
+    Write-Host "[Ampere] $Message" -ForegroundColor DarkGray
 }
 
 function Write-Ok([string] $Message) {
@@ -191,7 +191,7 @@ function ConvertTo-ModId([string] $Name) {
     $id = $Name.ToLowerInvariant() -replace "[^a-z0-9_-]+", "-"
     $id = $id.Trim("-_")
     if ([string]::IsNullOrWhiteSpace($id)) {
-        return "my-autism-addon"
+        return "my-Ampere-addon"
     }
     if ($id[0] -notmatch "[a-z]") {
         $id = "addon-$id"
@@ -274,7 +274,7 @@ function Get-FirstJavaPackage([string] $Project) {
         $json = Get-JsonFile $entry
         $classes = @()
         if ($json.entrypoints.client) { $classes += @($json.entrypoints.client) }
-        if ($json.entrypoints.autism) { $classes += @($json.entrypoints.autism) }
+        if ($json.entrypoints.Ampere) { $classes += @($json.entrypoints.Ampere) }
         foreach ($class in $classes) {
             if ($class -match "^(.+)\.[^.]+$") {
                 return $matches[1]
@@ -434,7 +434,7 @@ function Configure-Addon {
     $oldPackage = Get-FirstJavaPackage $project
     $oldVersion = Get-TomlVersion $versionsPath "mod-version"
     $oldClientClass = if ($fabric.entrypoints.client) { [string] @($fabric.entrypoints.client)[0] } else { "$oldPackage.Init" }
-    $oldAddonClass = if ($fabric.entrypoints.autism) { [string] @($fabric.entrypoints.autism)[0] } else { "$oldPackage.Addon" }
+    $oldAddonClass = if ($fabric.entrypoints.Ampere) { [string] @($fabric.entrypoints.Ampere)[0] } else { "$oldPackage.Addon" }
     $originalMixinName = if ($fabric.mixins -and @($fabric.mixins).Count -gt 0) { [string] @($fabric.mixins)[0] } else { "" }
     $clientSimple = Get-ClassSimpleName $oldClientClass "Init"
     $addonSimple = Get-ClassSimpleName $oldAddonClass "Addon"
@@ -477,7 +477,7 @@ function Configure-Addon {
         $Author = Read-Value "Author" (Get-DefaultAuthor) { param($v) -not [string]::IsNullOrWhiteSpace($v) }
     }
     if ([string]::IsNullOrWhiteSpace($Description)) {
-        $suggestedDescription = "$AddonName addon for AUTISM Client."
+        $suggestedDescription = "$AddonName addon for Ampere Client."
         if ($Advanced) {
             $Description = Read-Value "Description" $suggestedDescription { param($v) -not [string]::IsNullOrWhiteSpace($v) }
         } else {
@@ -499,7 +499,7 @@ function Configure-Addon {
         $fabric | Add-Member -MemberType NoteProperty -Name entrypoints -Value ([pscustomobject]@{})
     }
     $fabric.entrypoints.client = @("$Package.$clientSimple")
-    $fabric.entrypoints.autism = @("$Package.$addonSimple")
+    $fabric.entrypoints.Ampere = @("$Package.$addonSimple")
 
     if ($fabric.mixins -and @($fabric.mixins).Count -gt 0) {
         $oldMixinName = if ([string]::IsNullOrWhiteSpace($originalMixinName)) { [string] @($fabric.mixins)[0] } else { $originalMixinName }
@@ -579,18 +579,18 @@ function Test-AddonProject([string] $Project, [switch] $AllowTemplateNames) {
             if ([string]::IsNullOrWhiteSpace([string] $fabric.name)) {
                 Add-Failure $failures "fabric.mod.json name is empty."
             }
-            if (-not $fabric.entrypoints.autism) {
-                Add-Failure $failures "Missing autism entrypoint in fabric.mod.json."
+            if (-not $fabric.entrypoints.Ampere) {
+                Add-Failure $failures "Missing Ampere entrypoint in fabric.mod.json."
             } else {
-                foreach ($entry in @($fabric.entrypoints.autism)) {
+                foreach ($entry in @($fabric.entrypoints.Ampere)) {
                     $path = Join-Path $Project ("src/main/java/" + ([string] $entry).Replace(".", "/") + ".java")
                     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
-                        Add-Failure $failures "Autism entrypoint class file is missing: $entry"
+                        Add-Failure $failures "Ampere entrypoint class file is missing: $entry"
                     }
                 }
             }
-            if (-not $fabric.depends.autism) {
-                Add-Failure $failures "fabric.mod.json must depend on autism."
+            if (-not $fabric.depends.Ampere) {
+                Add-Failure $failures "fabric.mod.json must depend on Ampere."
             }
             if (-not $AllowTemplateNames) {
                 if ([string] $fabric.id -match "template|example") {
@@ -611,12 +611,12 @@ function Test-AddonProject([string] $Project, [switch] $AllowTemplateNames) {
     $versionsPath = Join-Path $Project "gradle/libs.versions.toml"
     if (Test-Path -LiteralPath $versionsPath -PathType Leaf) {
         $addonVersion = Get-TomlVersion $versionsPath "mod-version"
-        $hostVersion = Get-TomlVersion $versionsPath "autism"
+        $hostVersion = Get-TomlVersion $versionsPath "Ampere"
         if (-not (Test-Version $addonVersion)) {
             Add-Failure $failures "Addon mod-version is missing or invalid."
         }
         if ([string]::IsNullOrWhiteSpace($hostVersion)) {
-            Add-Failure $failures "AUTISM dependency version is missing from gradle/libs.versions.toml."
+            Add-Failure $failures "Ampere dependency version is missing from gradle/libs.versions.toml."
         }
     }
 
@@ -635,10 +635,10 @@ function Test-AddonProject([string] $Project, [switch] $AllowTemplateNames) {
         $_.Extension -in @(".java", ".json", ".md", ".kts", ".toml", ".properties", ".yml", ".yaml")
     }
     $templateLeftovers = @(
-        "autism-minimal-addon-template",
-        "autism-advanced-addon-template",
-        "AUTISM Minimal Addon Template",
-        "AUTISM Advanced Addon Template"
+        "Ampere-minimal-addon-template",
+        "Ampere-advanced-addon-template",
+        "Ampere Minimal Addon Template",
+        "Ampere Advanced Addon Template"
     )
     foreach ($file in $files) {
         $text = Get-TextFile $file.FullName
@@ -681,20 +681,20 @@ function Validate-AddonSystem {
     $warnings = New-Object System.Collections.Generic.List[string]
 
     $rootRequired = @(
-        "src/main/java/autismclient/addons/AddonManager.java",
-        "src/main/java/autismclient/api/AutismAddon.java",
-        "src/main/java/autismclient/api/SimpleAddon.java",
-        "src/main/java/autismclient/api/AutismAddons.java",
-        "src/main/java/autismclient/api/ApiVersion.java",
-        "src/main/java/autismclient/api/module/SimpleModule.java",
-        "src/main/java/autismclient/api/macro/SimpleAction.java",
-        "src/main/java/autismclient/api/macro/SimpleCondition.java",
-        "src/main/java/autismclient/api/macro/MacroActionRegistry.java",
-        "src/main/java/autismclient/api/macro/MacroPresetRegistry.java",
-        "src/main/java/autismclient/api/hud/HudElements.java",
-        "src/main/java/autismclient/api/event/AddonEvents.java",
-        "src/main/java/autismclient/gui/screen/AutismAddonsScreen.java",
-        "src/main/java/autismclient/util/macro/MissingAddonAction.java",
+        "src/main/java/ampere/addons/AddonManager.java",
+        "src/main/java/ampere/api/AmpereAddon.java",
+        "src/main/java/ampere/api/SimpleAddon.java",
+        "src/main/java/ampere/api/AmpereAddons.java",
+        "src/main/java/ampere/api/ApiVersion.java",
+        "src/main/java/ampere/api/module/SimpleModule.java",
+        "src/main/java/ampere/api/macro/SimpleAction.java",
+        "src/main/java/ampere/api/macro/SimpleCondition.java",
+        "src/main/java/ampere/api/macro/MacroActionRegistry.java",
+        "src/main/java/ampere/api/macro/MacroPresetRegistry.java",
+        "src/main/java/ampere/api/hud/HudElements.java",
+        "src/main/java/ampere/api/event/AddonEvents.java",
+        "src/main/java/ampere/gui/screen/AmpereAddonsScreen.java",
+        "src/main/java/ampere/util/macro/MissingAddonAction.java",
         "addon-templates/README.md",
         "addon-templates/addon-toolkit.ps1"
     )
@@ -726,9 +726,9 @@ function Validate-AddonSystem {
         foreach ($warning in $result.Warnings) {
             Add-Warning $warnings "$templateName template: $warning"
         }
-        $targetVersion = Get-TomlVersion (Join-Path $project "gradle/libs.versions.toml") "autism"
+        $targetVersion = Get-TomlVersion (Join-Path $project "gradle/libs.versions.toml") "Ampere"
         if ($mainVersion -and $targetVersion -and $mainVersion -ne $targetVersion) {
-            Add-Failure $failures "$templateName template targets AUTISM $targetVersion, main client is $mainVersion."
+            Add-Failure $failures "$templateName template targets Ampere $targetVersion, main client is $mainVersion."
         }
     }
 
@@ -833,7 +833,7 @@ function Show-Menu {
     $script:LastAddonPath = ""
     while ($true) {
         Write-Host ""
-        Write-Host "AUTISM ADDON KIT" -ForegroundColor Red
+        Write-Host "Ampere ADDON KIT" -ForegroundColor Red
         Write-Host "1. New addon"
         Write-Host "2. Build addon"
         Write-Host "3. Scan addon"

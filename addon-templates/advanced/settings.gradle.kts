@@ -6,4 +6,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "autism-advanced-addon-template"
+rootProject.name = "Ampere-advanced-addon-template"

@@ -9,7 +9,7 @@ base {
 }
 
 repositories {
-    // AUTISM Client is consumed from your local Maven repo. In the AUTISM project run:
+    // Ampere Client is consumed from your local Maven repo. In the Ampere project run:
     //     ./gradlew publishToMavenLocal
     mavenLocal()
     maven("https://maven.fabricmc.net/") { name = "Fabric" }
@@ -17,14 +17,14 @@ repositories {
 }
 
 dependencies {
-    // Mirrors the AUTISM Client build: official Mojang mappings are implicit for 26.1.2, so there is no
+    // Mirrors the Ampere Client build: official Mojang mappings are implicit for 26.1.2, so there is no
     // explicit `mappings(...)` line and dependencies use plain `implementation`.
     minecraft(libs.minecraft)
     implementation(libs.fabric.loader)
     implementation(libs.fabric.api)
 
-    // The AUTISM Client API (published to mavenLocal from the AUTISM project).
-    implementation(libs.autism)
+    // The Ampere Client API (published to mavenLocal from the Ampere project).
+    implementation(libs.Ampere)
 }
 
 // Turns an exact Minecraft version (e.g. "26.1.2") into a patch-compatible range ("~26.1") so the addon

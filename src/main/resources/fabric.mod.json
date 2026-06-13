@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "autism",
+  "id": "ampere",
   "version": "${version}",
-  "name": "AUTISM Client",
-  "description": "AUTISM Client is an elite packet, macro, and duping toolkit built for players who want total control.",
+  "name": "Ampere Client",
+  "description": "Ampere Client is an elite packet, macro, and duping toolkit built for players who want total control.",
   "authors": [
     "Melonik"
   ],
@@ -22,18 +22,18 @@
       }
     }
   },
-  "icon": "assets/autismclient/icon.png",
+  "icon": "assets/ampere/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "autismclient.AutismClientMod"
+      "ampere.AmpereMod"
     ],
     "modmenu": [
-      "autismclient.compat.AutismModMenuIntegration"
+      "ampere.compat.AmpereModMenuIntegration"
     ]
   },
   "mixins": [
-    "autism.mixins.json"
+    "ampere.mixins.json"
   ],
   "depends": {
     "java": ">=25",

@@ -1,9 +1,9 @@
 package com.example.addon.macro;
 
 import com.example.addon.ExampleAddon;
-import autismclient.api.macro.ActionSchema;
-import autismclient.api.macro.AddonContextAction;
-import autismclient.api.macro.MacroExecutionContext;
+import ampere.api.macro.ActionSchema;
+import ampere.api.macro.AddonContextAction;
+import ampere.api.macro.MacroExecutionContext;
 import net.minecraft.nbt.CompoundTag;
 
 // A macro condition: a step that waits. Extend AddonContextAction and block in run(), e.g. with

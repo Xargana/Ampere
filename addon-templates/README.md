@@ -1,8 +1,8 @@
-# AUTISM Client Addon Templates
+# Ampere Client Addon Templates
 
-These are the official addon templates for AUTISM Client.
+These are the official addon templates for Ampere Client.
 
-Put these in the same repo as the client source. They are standalone Fabric mod projects, but they depend on the AUTISM Client API being published to your local Maven repo first.
+Put these in the same repo as the client source. They are standalone Fabric mod projects, but they depend on the Ampere Client API being published to your local Maven repo first.
 
 This is not some magical separate SDK. Build the client API locally, then build your addon.
 
@@ -43,7 +43,7 @@ Use this when you want to see how everything works together, or when the minimal
 
 ## Build Flow
 
-From the main AUTISM Client folder, publish the API locally:
+From the main Ampere Client folder, publish the API locally:
 
 .\gradlew.bat publishToMavenLocal --no-daemon
 

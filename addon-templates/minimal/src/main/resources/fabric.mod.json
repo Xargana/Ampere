@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "id": "autism-minimal-addon-template",
+  "id": "Ampere-minimal-addon-template",
   "version": "${version}",
-  "name": "AUTISM Minimal Addon Template",
-  "description": "Small AUTISM Client addon example: one module, one macro action, and one macro condition.",
+  "name": "Ampere Minimal Addon Template",
+  "description": "Small Ampere Client addon example: one module, one macro action, and one macro condition.",
   "authors": [
     "You"
   ],
   "custom": {
-    "autism:color": "80,220,120",
+    "Ampere:color": "80,220,120",
     "modmenu": {
       "parent": {
-        "id": "autism"
+        "id": "Ampere"
       }
     }
   },
@@ -20,7 +20,7 @@
     "client": [
       "com.example.minimal.MinimalInit"
     ],
-    "autism": [
+    "Ampere": [
       "com.example.minimal.MinimalAddon"
     ]
   },
@@ -29,6 +29,6 @@
     "minecraft": "${mc_compat}",
     "fabricloader": ">=0.18.4",
     "fabric-api": "*",
-    "autism": ">=2.3"
+    "Ampere": ">=2.3"
   }
 }

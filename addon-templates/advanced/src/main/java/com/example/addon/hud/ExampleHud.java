@@ -1,7 +1,7 @@
 package com.example.addon.hud;
 
 import com.example.addon.ExampleAddon;
-import autismclient.api.hud.HudElementProvider;
+import ampere.api.hud.HudElementProvider;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;

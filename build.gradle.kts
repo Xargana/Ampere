@@ -54,11 +54,11 @@ dependencies {
 
 }
 
-val generatedAutismResourcesDir = layout.buildDirectory.dir("generated/resources/autism/main")
+val generatedAmpereResourcesDir = layout.buildDirectory.dir("generated/resources/Ampere/main")
 
 sourceSets {
     main {
-        resources.srcDir(generatedAutismResourcesDir)
+        resources.srcDir(generatedAmpereResourcesDir)
     }
 }
 
@@ -66,7 +66,7 @@ val generateVanillaUiAssets by tasks.registering {
     // Semantic feature icons used by the vanilla-friendly UI. Structural
     // actions such as close and reorder are rendered as text symbols.
     val iconSourceDir = file("assets/icons")
-    val outputDir = generatedAutismResourcesDir.map { it.dir("assets/autismclient") }
+    val outputDir = generatedAmpereResourcesDir.map { it.dir("assets/ampere") }
 
     inputs.dir(iconSourceDir)
     outputs.dir(outputDir)
@@ -108,11 +108,11 @@ val generateVanillaUiAssets by tasks.registering {
     }
 }
 
-val generateAutismInspectorMappings by tasks.registering {
+val generateAmpereInspectorMappings by tasks.registering {
     val mappingFiles = fileTree(".gradle/loom-cache/source_mappings") {
         include("**/*.tiny")
     }
-    val outputFile = generatedAutismResourcesDir.map { it.file("autism-inspector-mappings.tsv") }
+    val outputFile = generatedAmpereResourcesDir.map { it.file("Ampere-inspector-mappings.tsv") }
 
     inputs.files(mappingFiles)
     outputs.file(outputFile)
@@ -266,7 +266,7 @@ val generateAutismInspectorMappings by tasks.registering {
 
 tasks {
     processResources {
-        dependsOn(generateAutismInspectorMappings)
+        dependsOn(generateAmpereInspectorMappings)
         dependsOn(generateVanillaUiAssets)
         val propertyMap = mapOf(
             "version" to project.version,
@@ -317,13 +317,13 @@ tasks {
 }
 
 // Publish the Loom-remapped jar to the local Maven repo so the standalone addon-template (and any
-// third-party addon) can depend on it via `modImplementation("com.autismclient:autism:<version>")`.
+// third-party addon) can depend on it via `modImplementation("com.Ampere:Ampere:<version>")`.
 // Run: ./gradlew publishToMavenLocal
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
-            groupId = "com.autismclient"
-            artifactId = "autism"
+            groupId = "com.Ampere"
+            artifactId = "Ampere"
             version = project.version.toString()
             from(components["java"])
         }

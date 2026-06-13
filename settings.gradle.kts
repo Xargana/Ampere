@@ -9,4 +9,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "YungLightUI"
+rootProject.name = "Ampere"

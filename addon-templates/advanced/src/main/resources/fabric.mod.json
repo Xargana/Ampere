@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "id": "autism-advanced-addon-template",
+  "id": "Ampere-advanced-addon-template",
   "version": "${version}",
-  "name": "AUTISM Advanced",
-  "description": "Reference addon for AUTISM Client: a module, macro action, preset, condition, command, HUD element, and event hook.",
+  "name": "Ampere Advanced",
+  "description": "Reference addon for Ampere Client: a module, macro action, preset, condition, command, HUD element, and event hook.",
   "authors": [
     "You"
   ],
   "custom": {
-    "autism:color": "255,80,80",
+    "Ampere:color": "255,80,80",
     "modmenu": {
       "parent": {
-        "id": "autism"
+        "id": "Ampere"
       }
     }
   },
@@ -20,18 +20,18 @@
     "client": [
       "com.example.addon.ExampleInit"
     ],
-    "autism": [
+    "Ampere": [
       "com.example.addon.ExampleAddon"
     ]
   },
   "mixins": [
-    "autism-advanced-addon-template.mixins.json"
+    "Ampere-advanced-addon-template.mixins.json"
   ],
   "depends": {
     "java": ">=25",
     "minecraft": "${mc_compat}",
     "fabricloader": ">=0.18.4",
     "fabric-api": "*",
-    "autism": ">=2.3"
+    "Ampere": ">=2.3"
   }
 }

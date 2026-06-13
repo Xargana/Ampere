@@ -1,13 +1,13 @@
 package com.example.minimal;
 
-import autismclient.api.ApiVersion;
-import autismclient.api.SimpleAddon;
-import autismclient.api.macro.MacroActionEntry;
-import autismclient.api.module.SimpleModule;
-import autismclient.util.AutismClientMessaging;
+import ampere.api.ApiVersion;
+import ampere.api.SimpleAddon;
+import ampere.api.macro.MacroActionEntry;
+import ampere.api.module.SimpleModule;
+import ampere.util.AmpereMessaging;
 
 public final class MinimalAddon extends SimpleAddon {
-    public static final String ID = "autism-minimal-addon-template";
+    public static final String ID = "Ampere-minimal-addon-template";
 
     public MinimalAddon() {
         super(ApiVersion.CURRENT, "com.example.minimal");
@@ -20,13 +20,13 @@ public final class MinimalAddon extends SimpleAddon {
             .addText("message", "Message", "Hello from my addon")
             .onEnabled(self -> {
                 if (self.getBool("greet")) {
-                    AutismClientMessaging.sendPrefixed("\u00a7a" + self.getText("message"));
+                    AmpereMessaging.sendPrefixed("\u00a7a" + self.getText("message"));
                 }
             });
         registerModule(module);
 
         registerAction(simpleAction("say-hello", "Say Hello", "Send a short addon message.", "S", mc ->
-            AutismClientMessaging.sendPrefixed("\u00a7aHello from the minimal addon!")));
+            AmpereMessaging.sendPrefixed("\u00a7aHello from the minimal addon!")));
 
         MacroActionEntry condition = simpleCondition("wait-player", "Wait Player", "Wait until the local player exists.",
             "Waiting for player", "P", mc -> mc.player != null);

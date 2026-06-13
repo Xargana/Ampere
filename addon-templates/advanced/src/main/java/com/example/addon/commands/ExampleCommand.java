@@ -1,8 +1,8 @@
 package com.example.addon.commands;
 
-import autismclient.commands.AutismCommandSource;
-import autismclient.commands.Command;
-import autismclient.util.AutismClientMessaging;
+import ampere.commands.AmpereCommandSource;
+import ampere.commands.Command;
+import ampere.util.AmpereMessaging;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
@@ -14,15 +14,15 @@ public final class ExampleCommand extends Command {
     }
 
     @Override
-    public void build(LiteralArgumentBuilder<AutismCommandSource> root) {
+    public void build(LiteralArgumentBuilder<AmpereCommandSource> root) {
         root.executes(ctx -> {
-            AutismClientMessaging.sendPrefixed("\u00a7dExample addon command works!");
+            AmpereMessaging.sendPrefixed("\u00a7dExample addon command works!");
             return SUCCESS;
         });
 
-        root.then(RequiredArgumentBuilder.<AutismCommandSource, String>argument("text", StringArgumentType.greedyString())
+        root.then(RequiredArgumentBuilder.<AmpereCommandSource, String>argument("text", StringArgumentType.greedyString())
             .executes(ctx -> {
-                AutismClientMessaging.sendPrefixed("\u00a7dYou said: \u00a7f" + StringArgumentType.getString(ctx, "text"));
+                AmpereMessaging.sendPrefixed("\u00a7dYou said: \u00a7f" + StringArgumentType.getString(ctx, "text"));
                 return SUCCESS;
             }));
     }

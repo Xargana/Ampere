@@ -1,6 +1,6 @@
-# AUTISM Minimal Addon Template
+# Ampere Minimal Addon Template
 
-Smallest useful AUTISM addon example:
+Smallest useful Ampere addon example:
 
 - one module;
 - one macro action;
@@ -11,7 +11,7 @@ Use `../advanced` when you need commands, HUD elements, events, raw custom macro
 
 ## Build
 
-1. From the AUTISM Client project, publish the API locally:
+1. From the Ampere Client project, publish the API locally:
    ```powershell
    .\gradlew.bat publishToMavenLocal --no-daemon
    ```

@@ -1,15 +1,15 @@
 package com.example.addon.modules;
 
 import com.example.addon.ExampleAddon;
-import autismclient.modules.PackModule;
-import autismclient.modules.PackModuleOption;
-import autismclient.util.AutismClientMessaging;
+import ampere.modules.PackModule;
+import ampere.modules.PackModuleOption;
+import ampere.util.AmpereMessaging;
 
 // A toggleable module. With no category it auto-lands under a menu column named after your addon.
 // Read option values with bool/integer/decimal/choice/text/list(id). Group options with .group("...").
 public final class ExampleModule extends PackModule {
     public ExampleModule() {
-        super(ExampleAddon.ID + ":example", "Example", "Demonstrates an AUTISM addon module.");
+        super(ExampleAddon.ID + ":example", "Example", "Demonstrates an Ampere addon module.");
 
         option(PackModuleOption.bool("greet", "Greet on enable", true).group("General"));
         option(PackModuleOption.integer("amount", "Amount", 3, 1, 10, 1).group("General"));
@@ -22,7 +22,7 @@ public final class ExampleModule extends PackModule {
         if (bool("greet")) {
             String msg = "[Example] enabled - amount " + integer("amount") + ", style " + choice("style");
             if (bool("shout")) msg = msg.toUpperCase(java.util.Locale.ROOT);
-            AutismClientMessaging.sendPrefixed("\u00a7b" + msg);
+            AmpereMessaging.sendPrefixed("\u00a7b" + msg);
         }
     }
 }
