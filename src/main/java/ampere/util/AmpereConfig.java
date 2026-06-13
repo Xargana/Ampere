@@ -107,7 +107,7 @@ public final class AmpereConfig {
 
     public boolean keybindInsideGui = false;
 
-    public boolean customMainMenu = true;
+    public boolean customMainMenu = false;
 
     public boolean welcomeShown = false;
     public String welcomeInstallIdentity = "";

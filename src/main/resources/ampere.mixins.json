@@ -32,7 +32,6 @@
     "AmpereSplashRendererMixin",
     "AmpereSplashManagerMixin",
     "AmperePanicMenuMixin",
-    "AmpereTitleScreenSupportMixin",
     "AmpereGuiRendererPanoramaMixin",
     "AmperePanoramaOverlayMixin",
     "AmpereSleepingChatScreenMixin",
