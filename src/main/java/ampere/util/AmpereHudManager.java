@@ -1273,10 +1273,10 @@ public final class AmpereHudManager {
         int rowH = defaultHudRowStep();
         int logoBottom = defaultLogoElementHeight();
         return switch (id) {
-            case WATERMARK -> new int[] {0, 0};
-            case FPS -> new int[] {0, logoBottom};
-            case TPS, PING -> new int[] {0, logoBottom};
-            case SPEED -> new int[] {0, logoBottom + rowH};
+            // TODO: dynamically change fps,tps,ping and speed element locations to below the logo when enabled, if they are in these positions already
+            case FPS -> new int[] {0, 0};
+            case TPS, PING -> new int[] {0, 0};
+            case SPEED -> new int[] {0, rowH};
             case ACTIVE_MODULES -> new int[] {0, 0};
 
             case ROTATION -> new int[] {-HUD_SAFE_ZONE_X, -HUD_SAFE_ZONE_Y};
@@ -1293,7 +1293,6 @@ public final class AmpereHudManager {
         ampere.api.hud.HudElementProvider provider = ampere.api.hud.HudElements.get(id);
         if (provider != null) return provider.defaultEnabled();
         return ACTIVE_MODULES.equals(id)
-            || WATERMARK.equals(id)
             || FPS.equals(id)
             || SPEED.equals(id)
             || COORDINATES.equals(id)
