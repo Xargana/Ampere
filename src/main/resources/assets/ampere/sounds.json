@@ -1,7 +1,7 @@
 {
   "gui.main_menu_click": {
     "sounds": [
-      "Ampere:gui/main_menu_click"
+      "ampere:gui/main_menu_click"
     ]
   }
 }

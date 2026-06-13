@@ -223,7 +223,6 @@ public class AmpereTitleScreen extends Screen {
         AmpereUiScale.pushOverlayScale(graphics);
         try {
             renderAccountProxyInfo(graphics);
-            renderDonationHeader(graphics);
             renderMeteorCredits(graphics);
             renderCommandPanel(graphics, uiMouseX, uiMouseY, delta);
             renderEssentialPanel(graphics, uiMouseX, uiMouseY, delta);
@@ -393,8 +392,6 @@ public class AmpereTitleScreen extends Screen {
 
         layoutUtilityButtons(rowX, rowW, quitY, rowH);
 
-        layoutSupportButtons();
-
         if (essentialLoaded) {
             layoutEssentialPanel(panelX, panelY, panelH);
             layoutEssentialButtons();
@@ -522,31 +519,7 @@ public class AmpereTitleScreen extends Screen {
         return essentialFallbackSkin;
     }
 
-    private void layoutSupportButtons() {
-        int x = 4;
-        int y = donationHeaderY() + UiText.fontHeight(UiAssets.FONT_LABEL) + 5;
-        int h = 18;
-
-        Component cardDonateLabel = Component.literal("Card/PayPal");
-        buttons.add(new MenuButton(x, y, supportButtonWidth(cardDonateLabel), h, cardDonateLabel, true,
-            () -> AmpereLinks.open(AmpereLinks.KOFI))
-            .withLeftIcon(DONATE_SUPPORT_ICON, SUPPORT_ICON_WIDTH, SUPPORT_ICON_HEIGHT, SUPPORT_ICON_DRAW_SIZE));
-
-        Component cryptoDonateLabel = Component.literal("Crypto");
-        buttons.add(new MenuButton(x, y + h + 3, supportButtonWidth(cryptoDonateLabel), h, cryptoDonateLabel, true,
-            () -> AmpereLinks.open(AmpereLinks.CRYPTO_DONATE))
-            .withLeftIcon(DONATE_SUPPORT_ICON, SUPPORT_ICON_WIDTH, SUPPORT_ICON_HEIGHT, SUPPORT_ICON_DRAW_SIZE));
-
-        Component incDiscordLabel = Component.literal("Ampere INC");
-        buttons.add(new MenuButton(x, y + (h + 3) * 2, supportButtonWidth(incDiscordLabel), h, incDiscordLabel, true,
-            () -> AmpereLinks.open(AmpereLinks.Ampere_INC_DISCORD))
-            .withLeftIcon(DISCORD_SUPPORT_ICON, SUPPORT_ICON_WIDTH, SUPPORT_ICON_HEIGHT, SUPPORT_ICON_DRAW_SIZE));
-
-        Component clientDiscordLabel = Component.literal("Ampere Client");
-        buttons.add(new MenuButton(x, y + (h + 3) * 3, supportButtonWidth(clientDiscordLabel), h, clientDiscordLabel, true,
-            () -> AmpereLinks.open(AmpereLinks.DISCORD))
-            .withLeftIcon(DISCORD_SUPPORT_ICON, SUPPORT_ICON_WIDTH, SUPPORT_ICON_HEIGHT, SUPPORT_ICON_DRAW_SIZE));
-    }
+    // removed donation and discord advertisements
 
     private int supportButtonWidth(Component label) {
         return UiText.width(this.font, label.getString(), UiAssets.FONT_LABEL, 0xFFFFFFFF) + compactSupportIconSize() + 11;
@@ -696,10 +669,7 @@ public class AmpereTitleScreen extends Screen {
         int leftWidth = UiText.width(this.font, left, fontId, white);
         UiText.draw(graphics, this.font, right, fontId, muted, x + leftWidth, y, false);
     }
-
-    private void renderDonationHeader(GuiGraphicsExtractor graphics) {
-        UiText.draw(graphics, this.font, "DONATE:", UiAssets.FONT_LABEL, 0xFFFFDADA, 4, donationHeaderY(), false);
-    }
+    // removed "DONATE:" title
 
     private void renderMeteorCredits(GuiGraphicsExtractor graphics) {
         List<MeteorCreditLine> credits = getMeteorCredits();

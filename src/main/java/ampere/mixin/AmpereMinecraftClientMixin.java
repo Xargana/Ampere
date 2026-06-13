@@ -86,7 +86,8 @@ public class AmpereMinecraftClientMixin {
 
         if (!PackHideState.isActive() && ampere.util.AmpereWelcomeGate.shouldShow(ampere.util.AmpereConfig.getGlobal())) {
             ampere.util.AmpereWelcomeGate.markShown(ampere.util.AmpereConfig.getGlobal());
-            client.setScreen(new ampere.gui.screen.AmpereWelcomeScreen());
+            // dont show the welcome screen
+            // TODO: remove AmpereWelcomeGate; no use
             ci.cancel();
             return;
         }
